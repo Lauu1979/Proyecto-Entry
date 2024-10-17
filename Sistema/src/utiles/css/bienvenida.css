@@ -1,0 +1,28 @@
+#contenido {
+    position: relative;
+    left: 45%;
+    width: 500px;
+    max-height: 550px;
+    border-radius: 9px;
+    padding: 35px;
+    margin: 0 15px;
+    background-color: #ffffff10;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 1);
+    font-weight: 600;
+}
+
+
+h1 {
+    text-align: center;
+}
+
+p {
+    text-align: justify;
+}
+
+#logo5 {
+    width: 670px;
+    position: absolute;
+    top: 0%;
+    left: 13%;
+}

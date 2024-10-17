@@ -1,0 +1,54 @@
+.parking-lot {
+    display: grid; 
+    grid-template-columns: repeat(7, 100px);
+    grid-gap: 15px; 
+    width: 100%;
+    height: 100%; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 10px; 
+  }
+  
+  .buttonTrue {
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px; 
+    height: 100px; 
+    border-radius: 5px; 
+    font-size: 1em; 
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+  }
+  
+  .buttonFalse {
+    background-color: rgb(224, 17, 17);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px; 
+    height: 100px; 
+    border-radius: 5px; 
+    font-size: 1em; 
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+  }
+  
+  .Contaaiinner {
+    position: absolute;
+    top: 15%;
+    left: 17%;
+    width: 900%;
+    height: 500%;
+    max-width: 1000px;
+    max-height: 500px;
+    border-radius: 9px;
+    padding: 35px;
+    margin: 0 15px;
+    background-color: #ffffff17;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 1);
+    font-weight: 700;
+  }

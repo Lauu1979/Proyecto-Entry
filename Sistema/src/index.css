@@ -1,0 +1,316 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/*
+.containeer {
+  position: relative;
+  max-width: 400px;
+  max-height: 350px;
+  border-radius: 9px;
+  padding: 35px;
+  margin: 0 15px;
+  background-color: #ffffff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 1);
+  font-weight: 600;
+}
+.booton {
+  border: none;
+  outline: none;
+  background-color: rgb(48, 169, 0);
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #000000;
+  border-radius: 5px;
+  transition: all ease 0.1s;
+  box-shadow: 0px 5px 0px 0px #99d2e400;
+}
+
+button:active {
+  transform: translateY(5px);
+  box-shadow: 0px 0px 0px 0px #9bc1fe;
+}
+/***************************************************************************/
+/*
+.containner {
+  position: relative;
+  max-width: 400px;
+  max-height: 350px;
+  border-radius: 9px;
+  padding: 35px;
+  margin: 0 15px;
+  background-color: #ffffff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 1);
+  font-weight: 600;
+}
+.butun {
+  border: none;
+  outline: none;
+  background-color: #6dbf78;
+  padding: 10px 20px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #000000;
+  border-radius: 5px;
+  transition: all ease 0.1s;
+  box-shadow: 0px 5px 0px 0px #cac6f5c7;
+}
+
+button:active {
+  transform: translateY(5px);
+  box-shadow: 0px 0px 0px 0px #9bc1fe;
+}
+.form-bxc i {
+  position: center;
+  font-size: 90px;
+  left: 60%;
+  font-weight: 500;
+}
+/***************************************************************************/
+/*
+
+.bun {
+  position: relative;
+  width: 40%;
+  left: 30%;
+  height: 25px;
+  background: transparent;
+  border: 2px solid #030504;
+  overflow: none;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #030504;
+  font-weight: 600;
+}
+.form-booxx h1{
+  font-size:15px;
+  color: #000000;
+  position: relative;
+  left: 10%;
+}
+.form-booxx i {
+position: relative;
+  font-size: 90px;
+  left: 20%;
+  font-weight: 500;
+}
+
+/***************************************************************************/
+
+
+/*Unico y principal*/
+/*
+#formContent {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: rgb(255, 255, 255);
+  padding: 50px;
+  width: 100%;
+  height: 425px;
+  max-width: 600px;
+  position: absolute;
+  top: 19%;
+  left: 9%;
+  padding: 0px;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 30px 60px 0 rgba(23, 24, 23, 0.459);
+  text-align: center;
+}
+
+#formFooter {
+  background-color: transparent;
+  position: relative;
+  padding: 25px;
+  text-align: center;
+  -webkit-border-radius: 0 0 10px 10px;
+  border-radius: 0 0 10px 10px;
+}
+
+h2.inactive {
+  color: #ffffff;
+}
+
+h2.active {
+  color: #000000;
+  border-bottom: 2px solid #5fbae9;
+}
+
+input[type=text] {
+  background-color: #ffffffed;
+  border: none;
+  position: relative;
+  left: 0%;
+  color: #000000;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  width: 80%;
+  border: 2px solid #2c7e0e;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+}
+
+input[type=text]:focus {
+  background-color: #ffffff;
+  border-bottom: 2px solid #2c7e0e;
+}
+
+input[type=text]:placeholder {
+  color: #ffffff;
+}
+
+input[type=password] {
+  background-color: #ffffffad;
+  border: none;
+  color: #000000;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  width: 80%;
+  border: 2px solid #2c7e0e;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+}
+
+input[type=password]:focus {
+  background-color: #ffffff;
+  border-bottom: 2px solid #2c7e0e;
+}
+
+input[type=password]:placeholder {
+  color: #cccccc;
+}
+
+input[type=number] {
+  background-color: #ffffffad;
+  position: relative;
+  left: 0%;
+  border: none;
+  color: #000000;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  width: 80%;
+  border: 2px solid #2c7e0e;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+}
+
+input[type=number]:focus {
+  background-color: #ffffff;
+  border-bottom: 2px solid #2c7e0e;
+}
+
+input[type=number]:placeholder {
+  color: #cccccc;
+}
+
+/* Simple CSS3 Fade-in Animation */
+/*
+@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+.fadeIn {
+  opacity:0;
+  -webkit-animation:fadeIn ease-in 1;
+  -moz-animation:fadeIn ease-in 1;
+  animation:fadeIn ease-in 1;
+
+  -webkit-animation-fill-mode:forwards;
+  -moz-animation-fill-mode:forwards;
+  animation-fill-mode:forwards;
+
+  -webkit-animation-duration:0s;
+  -moz-animation-duration:0s;
+  animation-duration:0s;
+}
+
+.fadeIn.first {
+  -webkit-animation-delay: 0.0s;
+  -moz-animation-delay: 0.0s;
+  animation-delay: 0.0s;
+}
+
+.fadeIn.second {
+  -webkit-animation-delay: 0.0s;
+  -moz-animation-delay: 0.0s;
+  animation-delay: 0.0s;
+}
+
+.fadeIn.third {
+  -webkit-animation-delay: 0.0s;
+  -moz-animation-delay: 0.0s;
+  animation-delay: 0.0s;
+}
+
+.fadeIn.fourth {
+  -webkit-animation-delay: 0s;
+  -moz-animation-delay: 0s;
+  animation-delay: 0s;
+}
+
+/* Simple CSS3 Fade-in Animation */
+/*
+.underlineHover:after {
+  display: block;
+  left: 0;
+  bottom: -10px;
+  width: 0;
+  height: 2px;
+  background-color: #56ed5e;
+  content: "";
+  transition: width 0.2s;
+}
+
+.underlineHover:hover {
+  color: #0d0d0d;
+}
+
+.underlineHover:hover:after{
+  width: 100%;
+}
+
+
+
+/* OTHERS */
+
+*:focus {
+    outline: none;
+} 
+

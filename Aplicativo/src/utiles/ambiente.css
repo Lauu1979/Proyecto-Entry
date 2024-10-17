@@ -1,0 +1,115 @@
+.ambiente {
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 5px solid #000000;
+  width: 100%; 
+  max-width: 500px; /* Limita el ancho máximo */
+  padding: 30px;
+  text-align: left;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  margin: 20px 0;
+  overflow-y: auto;
+  text-align: center;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  width: 80px;
+  margin-right: 10px;
+}
+
+.title {
+  font-size: 24px;
+  text-align: center;
+}
+
+.contenido5 {
+  margin-top: 20px;
+}
+
+h2 {
+  text-align: center;
+  color: green;
+}
+
+.tip {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.tip {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #d5ebd1;
+}
+
+.tip img.icon {
+  margin-right: 15px;
+  border-radius: 50%;
+  object-fit: cover;
+  width: 60px;
+  height: auto;
+  margin-right: 20px;
+}
+.tip p {
+  margin: 0;
+  color: #000000;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.tip-left {
+  justify-content: flex-start;
+  box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.2); /* Sombra en el lado izquierdo */
+}
+
+.tip-right {
+  justify-content: flex-start;
+  flex-direction: row-reverse;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2); /* Sombra en el lado derecho */
+}
+
+.tip-right img.icon {
+  margin-right: 0;
+  margin-left: 20px;
+}
+.botun {
+  width: 30%;
+  background-color: rgb(38, 108, 59);
+  color: white;
+  padding: 12px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-size: 16px;
+  margin-left: 250px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.botun:hover:hover {
+  background-color: #168713;
+  transform: scale(1.05);
+}
+.ambiente-planta-link {
+  display: inline-block;
+  background-color: rgb(38, 108, 59);
+  padding: 8px 8px;
+  border-radius: 40%;
+  cursor: pointer;
+  margin-top: -60px;
+  margin-left: -250px;
+}

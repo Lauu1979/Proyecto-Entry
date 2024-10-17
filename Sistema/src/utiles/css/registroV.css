@@ -1,0 +1,37 @@
+.Conntainer {
+    position: relative;
+    right: 0%;
+    width: 1300px;
+    max-height: 550px;
+    border-radius: 9px;
+    padding: 35px;
+    margin: 0 15px;
+    background-color: #ffffff10;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 1);
+    font-weight: 600;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 10%;
+  }
+  
+  table, th, td {
+    border: 3px solid #055002;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #ffffff;
+  }

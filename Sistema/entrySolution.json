@@ -1,0 +1,549 @@
+{
+  "Elementos": [
+    {
+      "id": 1,
+      "cantidad": 2,
+      "serial": "2AB56T",
+      "color": "negro",
+      "idFlujo": "1"
+    },
+    {
+      "id": 2,
+      "cantidad": 1,
+      "serial": "3GJ58I",
+      "color": "cafe",
+      "idFlujo": "2"
+    },
+    {
+      "id": 3,
+      "cantidad": 1,
+      "serial": "5K6L4P",
+      "color": "morado",
+      "idFlujo": "3"
+    },
+    {
+      "id": 4,
+      "cantidad": 2,
+      "serial": "4LP2Y0",
+      "color": "negro",
+      "idFlujo": "4"
+    },
+    {
+      "id": 5,
+      "cantidad": 1,
+      "serial": "L8HJ7F",
+      "color": "negro",
+      "idFlujo": "5"
+    },
+    {
+      "id": 6,
+      "cantidad": 1,
+      "serial": "D1RF65",
+      "color": "gris",
+      "idFlujo": "6"
+    },
+    {
+      "id": 7,
+      "cantidad": 2,
+      "serial": "JK074L",
+      "color": "gris",
+      "idFlujo": "7"
+    },
+    {
+      "id": 8,
+      "cantidad": 1,
+      "serial": "2RT34H",
+      "color": "negro",
+      "idFlujo": "8"
+    },
+    {
+      "id": 9,
+      "cantidad": 2,
+      "serial": "E45FD6",
+      "color": "negro",
+      "idFlujo": "9"
+    },
+    {
+      "id": 10,
+      "cantidad": 1,
+      "serial": "7YHB86",
+      "color": "cafe",
+      "idFlujo": "10"
+    }
+  ],
+  "Personas": [
+    {
+      "id": 1,
+      "rol": "Aprendiz",
+      "nombres": "Andrea",
+      "apellidos": "Bolaños Campos",
+      "tipoSangre": "O+",
+      "tipoDocumento": "TI",
+      "numeroDocumento": 28564789,
+      "estado": "Activo",
+      "codigoFicha": "FICHA001"
+    },
+    {
+      "id": 2,
+      "rol": "Funcionario",
+      "nombres": "Jose Fernando",
+      "apellidos": "Gonzales Benado",
+      "tipoSangre": "A+",
+      "tipoDocumento": "CC",
+      "numeroDocumento": 28203695,
+      "estado": "Activo",
+      "codigoFicha": "FICHA002"
+    },
+    {
+      "id": 3,
+      "rol": "Visitante",
+      "nombres": "Migel",
+      "apellidos": "Zuares Cuta",
+      "tipoSangre": "O-",
+      "tipoDocumento": "CC",
+      "numeroDocumento": 15428962,
+      "estado": "inactivo",
+      "codigoFicha": "FICHA003"
+    },
+    {
+      "id": 4,
+      "rol": "Aprendiz",
+      "nombres": "Juan Pablo",
+      "apellidos": "Reyes Galindo",
+      "tipoSangre": "AB-",
+      "tipoDocumento": "TI",
+      "numeroDocumento": 10815496321,
+      "estado": "inactivo",
+      "codigoFicha": "FICHA004"
+    },
+    {
+      "id": 5,
+      "rol": "Aprendiz",
+      "nombres": "Jhon Pablo",
+      "apellidos": "Gutierrez Rendon",
+      "tipoSangre": "o+",
+      "tipoDocumento": "CC",
+      "numeroDocumento": 10723456,
+      "estado": "inactivo",
+      "codigoFicha": "FICHA005"
+    },
+    {
+      "id": 6,
+      "rol": "Funcionario",
+      "nombres": "Carolina",
+      "apellidos": "Cepeda Pulveda",
+      "tipoSangre": "o+",
+      "tipoDocumento": "TI",
+      "numeroDocumento": 56239845,
+      "estado": "Activo",
+      "codigoFicha": "FICHA006"
+    },
+    {
+      "id": 7,
+      "rol": "funcionario",
+      "nombres": "Mariana Sofia",
+      "apellidos": "Perez Duque",
+      "tipoSangre": "o+",
+      "tipoDocumento": "TI",
+      "numeroDocumento": 70152364,
+      "estado": "Activo",
+      "codigoFicha": "FICHA007"
+    },
+    {
+      "id": 8,
+      "rol": "Visitante",
+      "nombres": "Melany",
+      "apellidos": "Cardenas Muñoz",
+      "tipoSangre": "o+",
+      "tipoDocumento": "CC",
+      "numeroDocumento": 27250365,
+      "estado": "Activo",
+      "codigoFicha": "FICHA008"
+    },
+    {
+      "id": 9,
+      "rol": "Funcionario",
+      "nombres": "Ana Maria",
+      "apellidos": "Campos Oviedo",
+      "tipoSangre": "o+",
+      "tipoDocumento": "TI",
+      "numeroDocumento": 98653210,
+      "estado": "inactivo",
+      "codigoFicha": "FICHA009"
+    },
+    {
+      "id": 10,
+      "rol": "Aprendiz",
+      "nombres": "Maria Fernanda",
+      "apellidos": "Salamanca Zapata",
+      "tipoSangre": "o+",
+      "tipoDocumento": "CC",
+      "numeroDocumento": 41023654,
+      "estado": "Activo",
+      "codigoFicha": "FICHA010"
+    }
+  ],
+  "Flujo": [
+    {
+      "id": 1,
+      "horaIngreso": "12:00",
+      "horaSalida": "5:30",
+      "fechaIngreso": "2024-02-12",
+      "fechaSalida": "2024-02-12",
+      "estado": "inactivo",
+      "idElemento": "1",
+      "idUsuarios": "1",
+      "idPersona": "1"
+    },
+    {
+      "id": 2,
+      "horaIngreso": "12:00",
+      "horaSalida": "6:00",
+      "fechaIngreso": "2022-03-20",
+      "fechaSalida": "2024-03-20",
+      "estado": "inactivo",
+      "idElemento": "2",
+      "idUsuarios": "2",
+      "idPersona": "2"
+    },
+    {
+      "id": 3,
+      "horaIngreso": "6:00",
+      "horaSalida": "6:00",
+      "fechaIngreso": "2020-02-12",
+      "fechaSalida": null,
+      "estado": "activo",
+      "idElemento": "3",
+      "idUsuarios": "3",
+      "idPersona": "3"
+    },
+    {
+      "id": 4,
+      "horaIngreso": "11:00",
+      "horaSalida": "5:00",
+      "fechaIngreso": "2024-01-11",
+      "fechaSalida": "2024-01-11",
+      "estado": "inactivo",
+      "idElemento": "4",
+      "idUsuarios": "4",
+      "idPersona": "4"
+    },
+    {
+      "id": 5,
+      "horaIngreso": "1:00",
+      "horaSalida": "4:00",
+      "fechaIngreso": "2024-02-12",
+      "fechaSalida": "2024-02-12",
+      "estado": "inactivo",
+      "idElemento": "5",
+      "idUsuarios": "5",
+      "idPersona": "5"
+    },
+    {
+      "id": 6,
+      "horaIngreso": "12:00",
+      "horaSalida": "6:00",
+      "fechaIngreso": "2024-04-05",
+      "fechaSalida": "2024-04-05",
+      "estado": "inactivo",
+      "idElemento": "6",
+      "idUsuarios": "6",
+      "idPersona": "6"
+    },
+    {
+      "id": 7,
+      "horaIngreso": "12:00",
+      "horaSalida": "6:00",
+      "fechaIngreso": "2024-05-08",
+      "fechaSalida": "2024-05-08",
+      "estado": "inactivo",
+      "idElemento": "7",
+      "idUsuarios": "7",
+      "idPersona": "7"
+    },
+    {
+      "id": 8,
+      "horaIngreso": "6:00",
+      "horaSalida": "12:00",
+      "fechaIngreso": "2024-05-08",
+      "fechaSalida": "2024-05-08",
+      "estado": "inactivo",
+      "idElemento": "8",
+      "idUsuarios": "8",
+      "idPersona": "8"
+    },
+    {
+      "id": 9,
+      "horaIngreso": "12:00",
+      "horaSalida": "6:00",
+      "fechaIngreso": "2024-02-16",
+      "fechaSalida": null,
+      "estado": "activo",
+      "idElemento": "9",
+      "idUsuarios": "9",
+      "idPersona": "9"
+    },
+    {
+      "id": 10,
+      "horaIngreso": "6:00",
+      "horaSalida": "6:00",
+      "fechaIngreso": "2024-03-07",
+      "fechaSalida": null,
+      "estado": "activo",
+      "idElemento": "10",
+      "idUsuarios": "10",
+      "idPersona": "10"
+    }
+  ],
+  "Usuarios": [
+    {
+      "id": 2,
+      "usuario": "marthalizeth@soy.sena.edu.co",
+      "contrasenia": "holasoy"
+    },
+    {
+      "id": 3,
+      "usuario": "felipe.glo@soy.sena.edu.co",
+      "contrasenia": "105142.Ju"
+    },
+    {
+      "id": 4,
+      "usuario": "clavijop@soy.sena.edu.co",
+      "contrasenia": "MLY.123"
+    },
+    {
+      "id": 5,
+      "usuario": "ld.sofia@soy.sena.edu.co",
+      "contrasenia": "Soynmi.546"
+    },
+    {
+      "id": 6,
+      "usuario": "sebas.canon@soy.sena.edu.co",
+      "contrasenia": "1542896.FGGH"
+    },
+    {
+      "id": 7,
+      "usuario": "danielhere@soy.sena.edu.co",
+      "contrasenia": "45632.ERT"
+    },
+    {
+      "id": 8,
+      "usuario": "jhoana.lopez@soy.sena.edu.co",
+      "contrasenia": "MPLS.L"
+    },
+    {
+      "id": 9,
+      "usuario": "andre.bls@soy.sena.edu.co",
+      "contrasenia": "1452.LI"
+    },
+    {
+      "id": 10,
+      "usuario": "gustav.ji@soy.sena.edu.co",
+      "contrasenia": "Mart.lita"
+    }
+  ],
+  "Vehiculo": [
+    {
+      "id": 1,
+      "placa": "PCG-202",
+      "idParqueo": 1,
+      "idFlujo": 1
+    },
+    {
+      "id": 2,
+      "placa": "JPL-035",
+      "idParqueo": 2,
+      "idFlujo": 2
+    },
+    {
+      "id": 3,
+      "placa": "MLY-888",
+      "idParqueo": 4,
+      "idFlujo": 3
+    },
+    {
+      "id": 4,
+      "placa": "JÑO-777",
+      "idParqueo": 4,
+      "idFlujo": 4
+    },
+    {
+      "id": 5,
+      "placa": "PQR-233",
+      "idParqueo": 5,
+      "idFlujo": 5
+    },
+    {
+      "id": 6,
+      "placa": "CHB-999",
+      "idParqueo": 6,
+      "idFlujo": 6
+    },
+    {
+      "id": 7,
+      "placa": "MOP-031",
+      "idParqueo": 7,
+      "idFlujo": 7
+    },
+    {
+      "id": 8,
+      "placa": "MLU-946",
+      "idParqueo": 8,
+      "idFlujo": 8
+    },
+    {
+      "id": 9,
+      "placa": "ADF-034",
+      "idParqueo": 9,
+      "idFlujo": 9
+    },
+    {
+      "id": 10,
+      "placa": "CFD-215",
+      "idParqueo": 10,
+      "idFlujo": 10
+    }
+  ],
+  "Parqueadero": [
+    {
+      "idParqueo": "11",
+      "numeroEstacionamiento": "23"
+    },
+    {
+      "idParqueo": "12",
+      "numeroEstacionamiento": "22"
+    },
+    {
+      "idParqueo": "13",
+      "numeroEstacionamiento": "15"
+    },
+    {
+      "idParqueo": "14",
+      "numeroEstacionamiento": "18"
+    },
+    {
+      "idParqueo": "15",
+      "numeroEstacionamiento": "20"
+    },
+    {
+      "idParqueo": "16",
+      "numeroEstacionamiento": "25"
+    },
+    {
+      "idParqueo": "17",
+      "numeroEstacionamiento": "12"
+    },
+    {
+      "idParqueo": "18",
+      "numeroEstacionamiento": "19"
+    },
+    {
+      "idParqueo": "19",
+      "numeroEstacionamiento": "21"
+    }
+  ],
+  "Ficha": [
+    {
+      "id": 1,
+      "codigoFicha": 2898754,
+      "estadoFicha": "activo",
+      "nombrePrograma": "ADSO"
+    },
+    {
+      "id": 2,
+      "codigoFicha": 202474730,
+      "estadoFicha": "activo",
+      "nombrePrograma": "Produccion de sonido"
+    },
+    {
+      "id": 3,
+      "codigoFicha": 202474732,
+      "estadoFicha": "inactivo",
+      "nombrePrograma": "Mercadeo"
+    },
+    {
+      "id": 4,
+      "codigoFicha": 2825881,
+      "estadoFicha": "activo",
+      "nombrePrograma": "Multimedia"
+    },
+    {
+      "id": 5,
+      "codigoFicha": 282024453,
+      "estadoFicha": "activo",
+      "nombrePrograma": "Logistica"
+    },
+    {
+      "id": 6,
+      "codigoFicha": 282024457,
+      "estadoFicha": "activo",
+      "nombrePrograma": "Desarrollo de videojuegos"
+    },
+    {
+      "id": 7,
+      "codigoFicha": 282024461,
+      "estadoFicha": "activo",
+      "nombrePrograma": "Redes"
+    },
+    {
+      "id": 8,
+      "codigoFicha": 282024485,
+      "estadoFicha": "activo",
+      "nombrePrograma": "Analisis y desarrollo de software"
+    },
+    {
+      "id": 9,
+      "codigoFicha": 282024487,
+      "estadoFicha": "activo",
+      "nombrePrograma": "Mercadeo"
+    },
+    {
+      "id": 10,
+      "codigoFicha": 282024502,
+      "estadoFicha": "activo",
+      "nombrePrograma": "Analisis y desarrollo de sistemas de informacion"
+    }
+  ],
+  "ProgramasDeFormacion": [
+    {
+      "id": 1,
+      "nombrePrograma": "Analisis y desarrollo de software"
+    },
+    {
+      "id": 2,
+      "nombrePrograma": "Analisis y desarrollo de sistemas de informacion"
+    },
+    {
+      "id": 3,
+      "nombrePrograma": "Mercadeo"
+    },
+    {
+      "id": 4,
+      "nombrePrograma": "Sistemas de informacion"
+    },
+    {
+      "id": 5,
+      "nombrePrograma": "Multimedia"
+    },
+    {
+      "id": 6,
+      "nombrePrograma": "Produccion de audiovisuales"
+    },
+    {
+      "id": 7,
+      "nombrePrograma": "Produccion de sonido"
+    },
+    {
+      "id": 8,
+      "nombrePrograma": "Desarrollo de videojuegos"
+    },
+    {
+      "id": 9,
+      "nombrePrograma": "Redes"
+    },
+    {
+      "id": 10,
+      "nombrePrograma": "Programacion de software"
+    }
+  ]
+}
