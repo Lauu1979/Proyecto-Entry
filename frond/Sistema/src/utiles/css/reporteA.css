@@ -1,0 +1,45 @@
+.Conntainer-REPORTE {
+    position: relative;
+    right: 49%;
+    width: 450px;
+    max-height: 550px;
+    border-radius: 9px;
+    padding: 35px;
+    margin: 0 15px;
+    background-color: #ffffff10;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Ajusté la sombra para hacerla más suave */
+    font-weight: 600;
+  }
+  
+  .logo3 {
+    position: absolute;
+    left: 45%;
+    top: 5%;
+    width: 600px;
+  }
+  
+  .boton-reporte { /* Corregí el nombre del botón */
+    border: none;
+    outline: none;
+    position: relative;
+    left: 60%;
+    background-color: rgb(48, 169, 0);
+    padding: 10px 30px;
+    width: 150px;
+    font-size: 16px;
+    font-weight: 600;
+    color: white; /* Cambié el color del texto a blanco para mejor contraste */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease; /* Ajusté la transición para mayor suavidad */
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); /* Ajusté la sombra para mayor profundidad */
+  }
+  
+  .boton-reporte:hover {
+    background-color: darkgreen; /* Hice el color de hover más oscuro para mayor contraste */
+  }
+  
+  .boton-reporte:active {
+    transform: translateY(2px); /* Corregí la transformación para que sea más sutil */
+  }
+  

@@ -1,0 +1,40 @@
+.estacionamiento {
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 5px solid #000000;
+  width: 150%;  
+  padding: 30px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.contenido5 {
+  grid-column: span 3;
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: #555;
+}
+.parking-lot {
+  display:grid;
+  grid-template-columns: repeat(3, 1fr); /* Cambiado a 1fr para permitir que los cuadros se ajusten automáticamente */
+  grid-gap: 15px;
+
+  height: auto; /* Ajustar automáticamente según el contenido */
+  justify-content: center; /* Centrar los elementos en el eje horizontal */
+  align-items: center; /* Centrar los elementos en el eje vertical */
+  padding: 10px;
+
+}
+.carros-planta-link {
+  display: inline-block;
+  background-color: rgb(38, 108, 59);
+  padding: 8px 8px;
+  border-radius: 40%;
+
+  margin-top: -50px;
+  margin-left: -250px;
+}
+
+.carros-planta-link:hover {
+  background-color: #2ca747;
+}

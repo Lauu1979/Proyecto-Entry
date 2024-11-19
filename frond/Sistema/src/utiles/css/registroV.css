@@ -1,0 +1,82 @@
+.Container {
+  position: relative;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  border-radius: 9px;
+  padding: 35px;
+  background-color: #f4f4f4;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  font-weight: 600;
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+table, th, td {
+  border: 1px solid #ddd;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+text{
+  background-color: #055002;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+
+.containerInput {
+  display: flex;
+  align-items: center;
+  margin: 20px auto;
+  width: 80%;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-link {
+  color: #055002;
+  text-decoration: none;
+  padding: 8px 16px;
+  border: 1px solid #055002;
+  border-radius: 5px;
+}
+
+.page-link:hover {
+  background-color: #055002;
+  color: white;
+}
+
+.page-item.active .page-link {
+  background-color: #055002;
+  color: white;
+}
+
