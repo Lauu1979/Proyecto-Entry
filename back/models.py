@@ -13,8 +13,7 @@ database = client["Entry-Solution"]
 #Validaciones
 class Usuarios(BaseModel):
     id: Optional[str] = Field(alias="_id") 
-    Usuario:str
-    contraseña:str
+    Contrasenia:str
     Nombres: str
     Apellidos: str
     NumeroDocumento: int
@@ -24,38 +23,48 @@ class Usuarios(BaseModel):
 
 
 class Personas:
-    def __init__(self, Nombres, Apellidos, TipoSangre, NumeroDocumento, FichaFormacion, ProgramaFormacion, Estado, email):
+    def __init__(self, Nombres, Apellidos, TipoSangre, NumeroDocumento,Rol, FichaFormacion, ProgramaFormacion,LugarEstablecido, Estado, email):
         self.Nombres = Nombres
         self.Apellidos = Apellidos
         self.TipoSangre = TipoSangre
         self.NumeroDocumento = NumeroDocumento
+        self.Rol= Rol
+        self.LugarEstablecido = LugarEstablecido
         self.FichaFormacion = FichaFormacion
         self.ProgramaFormacion = ProgramaFormacion
         self.Estado = Estado
         self.email = email
 
 class Eventos:
-    def __init__(self, fechaIngreso, fechaLimite, LugarEstablecido):
-    
+    def __init__(self,Nombres,Apellidos, TipoDocumento, NumeroDocumento, Lugar,Email, TipoElemento,  TipoVehiculo, Placa, fechaIngreso, fechaLimite):
+
+        
+        self.Nombres = Nombres
+        self.Apellidos = Apellidos
+        self.TipoDocumento =TipoDocumento
+        self.NumeroDocumento = NumeroDocumento
+        self.Lugar = Lugar 
+        self.Email = Email
+        self.TipoElemento = TipoElemento
+        self.TipoVehiculo = TipoVehiculo
+        self.Placa = Placa
         self.fechaIngreso = fechaIngreso
         self.fechaLimite = fechaLimite
-        self.LugarEstablecido = LugarEstablecido
+       
 
-
-class Parqueadero:
-    def __init__(self, numeroEstacionamiento, tipoVehiculo, placa, estado, fechaIngreso, fechaLimite, lugarEstablecido):
+class Estacionamiento:
+    def __init__(self, numeroEstacionamiento, tipoVehiculo, placa, Estado):
         self.numeroEstacionamiento = numeroEstacionamiento
         self.tipoVehiculo = tipoVehiculo
         self.placa = placa
-        self.estado = estado
-        self.fechaIngreso = fechaIngreso
-        self.fechaLimite = fechaLimite
-        self.lugarEstablecido = lugarEstablecido
+        self.Estado = Estado
+     
 
 
 class Elementos:
-    def __init__(self, TipoElemento, CantidadElemento, SerialElemento):
+    def __init__(self, TipoElemento,Color, CantidadElemento, SerialElemento):
         self.TipoElemento = TipoElemento
+        self.Color = Color
         self.CantidadElemento = CantidadElemento
         self.SerialElemento = SerialElemento
 

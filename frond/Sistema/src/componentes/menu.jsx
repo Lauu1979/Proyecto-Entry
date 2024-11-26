@@ -58,6 +58,9 @@ class Menu extends Component {
                   <li>
                     <NavLink to="/RegistroVisitante">Visitantes</NavLink>
                   </li>
+                  <li>
+                    <NavLink to="/RegistroEvento">Eventos</NavLink>
+                  </li>
                 </ul>
               </li>
               <li className="current-menu-item">
@@ -104,6 +107,7 @@ class Menu extends Component {
                   <li className="dir">
                     <NavLink to="/ReporteVisitante">Visitantes</NavLink>
                   </li>
+                  
                 </ul>
               </li>
               <li className="current-menu-item">

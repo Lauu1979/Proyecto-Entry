@@ -8,22 +8,32 @@ class UsuarioCreate(BaseModel):
     NumeroDocumento: str  # Si necesitas mantenerlo como string
     Telefono: Optional[str] = None  # Permitir valores nulos u opcionales si necesario
     Email: str
-    Contraseña: str
+    Contrasenia: str
+
 
 class UsuarioLogin(BaseModel):
     Email: str
-    Contraseña: str
+    Contrasenia: str
+
+class Usuario(BaseModel):
+    id: Optional[str] = Field(alias="_id")
+    Contrasenia: str
+    Nombres: str
+    Apellidos: str
+    NumeroDocumento: str  # Asegurarse de que el tipo sea consistente
+    Telefono: Optional[str] = None  # Permitir valores nulos u opcionales si necesario
+    Email: str
 
 class UsuarioUpdate(BaseModel):
     Nombres: Optional[str] = None
     Apellidos: Optional[str] = None
     Telefono: Optional[int] = None
     Email: Optional[str] = None
-    Contraseña: Optional[str] = None
+    Contrasenia: Optional[str] = None
 
 
 
-class PersonaCreate(BaseModel):
+class PersonaAprendiz(BaseModel):
     Nombres: str
     Apellidos: str
     TipoSangre: str
@@ -33,44 +43,65 @@ class PersonaCreate(BaseModel):
     FichaFormacion: Optional[str] = None
     ProgramaFormacion: str
     Estado: str
-    LugarEstablecido: Optional[str] = None
     email: str
-    
 
-class EventoCreate(BaseModel):
+class PersonaFuncionario(BaseModel):
     Nombres: str
     Apellidos: str
+    TipoSangre: str
     TipoDocumento: str
     NumeroDocumento: str
+    Rol: str
+    ProgramaFormacion: str
+    Estado: str
     email: str
-    TipoElemento: Optional[str] = None
-    TipoVehiculo: Optional[str] = None
-    fechaIngreso: datetime
-    fechaLimite: datetime
+
+class PersonaVisitante(BaseModel):
+    Nombres: str
+    Apellidos: str
+    TipoSangre: str
+    TipoDocumento: str
+    NumeroDocumento: str
+    Rol: str
     LugarEstablecido: str
+    Estado: str
+    email: str
 
 
-from pydantic import BaseModel
+    
 
-class ParqueaderoCreate(BaseModel):
+class EventoCreate(BaseModel): 
+    Nombres: str 
+    Apellidos: str 
+    TipoDocumento: str 
+    NumeroDocumento: str 
+    Lugar: str 
+    Email: str 
+    TipoElemento: Optional[str] = None 
+    TipoVehiculo: Optional[str] = None 
+    Placa: Optional[str] = None 
+    fechaIngreso: datetime 
+    fechaLimite:datetime 
+
+
+
+
+class EstacionamientoCreate(BaseModel):
     numeroEstacionamiento: str
     tipoVehiculo: str
     placa: str
-    estado: str
-    fechaIngreso: str
-    fechaLimite: str
-    lugarEstablecido: str
+    Estado:str
 
 
 
 class ElementoCreate(BaseModel):
     TipoElemento: str
+    Color: str
     CantidadElemento: int
     SerialElemento: str
     
 ################################################
-from pydantic import BaseModel
-from typing import Optional
+
 
 class UsuarioUpdate(BaseModel):
     Nombres: Optional[str]

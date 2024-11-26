@@ -9,6 +9,7 @@ import Menu from "./componentes/menu";
 import Registroapre from "./paginas/registroAprendiz";
 import Registrofuncionari from "./paginas/registroFuncionari";
 import Registrovisi from "./paginas/registroVisitante";
+import  RegistroEvento from "./paginas/registroEventos";
 import Registroelemen from "./paginas/registroelemento";
 import Parqueaderocarros from "./paginas/parqueaderoC";
 import Parqueaderomotos from "./paginas/parqueaderoM";
@@ -34,13 +35,14 @@ function App() {
           <Route path="/nuevacontraseña" exact element={<Nuevacontra />} />
           <Route path="/Menu" exact element={<Menu />} />
           <Route path="/RegistroAprendiz" exact element={<Registroapre />} />
-          <Route  path ="/eventos"exact element ={<Eventos/>}/>
+          <Route path="/eventos" exact element={<Eventos />} />
           <Route
             path="/RegistroFuncionario"
             exact
             element={<Registrofuncionari />}
           />
           <Route path="/RegistroVisitante" exact element={<Registrovisi />} />
+          <Route path="/RegistroEvento" exact element={<RegistroEvento/>}/>
           <Route path="/RegistroElemento" exact element={<Registroelemen />} />
           <Route
             path="/ParqueaderoCarros"

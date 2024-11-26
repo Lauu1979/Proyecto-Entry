@@ -1,0 +1,25 @@
+services:
+  fastapi:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - sistema
+      - aplicativo
+
+  sistema:
+    build:
+      context: ./frond/Sistema
+      dockerfile: Dockerfile
+    ports:
+      - "3001:5000" # Puedes cambiar el puerto según lo necesites
+
+  aplicativo:
+    build:
+      context: ./frond/Aplicativo
+      dockerfile: Dockerfile
+    ports:
+      - "3002:5000" # Puedes cambiar el puerto según lo necesites
+

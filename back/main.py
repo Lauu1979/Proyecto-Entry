@@ -1,8 +1,7 @@
-from fastapi import FastAPI
-from models import Usuarios
-from schemas import UsuarioCreate
+from fastapi import FastAPI, Depends, HTTPException, Query
+from models import Usuarios,Personas
+from schemas import UsuarioCreate,PersonaAprendiz,PersonaFuncionario, PersonaVisitante,EventoCreate,ElementoCreate,EstacionamientoCreate,UsuarioLogin
 from database import get_db
-from fastapi import Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import bcrypt
 
@@ -28,12 +27,12 @@ async def register_user(user: UsuarioCreate, db=Depends(get_db)):
     print(f"Datos recibidos: {user}")
 
     # Verificar si el usuario ya existe en la colección 'usuarios' por su número de documento
-    usuario_existente = await db.Usuarios.find_one({"NumeroDocumento": user.NumeroDocumento})
+    usuario_existente = await db.Usuarios.find_one({"Email": user.Email})
     if usuario_existente:
         raise HTTPException(status_code=400, detail="La persona ya existe")
 
     # Encriptar la contraseña del usuario
-    hashed_password = bcrypt.hashpw(user.Contraseña.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+    hashed_password = bcrypt.hashpw(user.Contrasenia.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
     # Crear un nuevo usuario con los datos proporcionados y la contraseña encriptada
     nuevo_usuario = {
@@ -42,9 +41,200 @@ async def register_user(user: UsuarioCreate, db=Depends(get_db)):
         "NumeroDocumento": user.NumeroDocumento,
         "Telefono": user.Telefono,
         "Email": user.Email,
-        "Contraseña": hashed_password,  # Almacenamos la contraseña en formato de string
+        "Contrasenia": hashed_password,  # Almacenamos la contraseña en formato de string
     }
 
     # Insertar el nuevo usuario en la base de datos
     await db.Usuarios.insert_one(nuevo_usuario)
     return {"mensaje": "Usuario registrado exitosamente"}
+
+###########################Endpoint para registrar un aprendiz#############################
+@app.post("/aprendiz/registro")
+async def register_aprendiz(user: PersonaAprendiz, db=Depends(get_db)):
+    print(f"Datos recibidos para aprendiz: {user}")
+
+    # Verificar si ya existe un aprendiz con el mismo número de documento
+    aprendiz_existente = await db.Personas.find_one({"NumeroDocumento": user.NumeroDocumento})
+    if aprendiz_existente:
+        raise HTTPException(status_code=400, detail="El aprendiz ya existe")
+    
+    # Crear un nuevo Aprendiz con los datos proporcionados
+    nuevo_aprendiz = {
+        "Nombres": user.Nombres,
+        "Apellidos": user.Apellidos,
+        "TipoSangre": user.TipoSangre,
+        "TipoDocumento": user.TipoDocumento,
+        "NumeroDocumento": user.NumeroDocumento,
+        "Rol":user.Rol,
+        "FichaFormacion": user.FichaFormacion,
+        "ProgramaFormacion": user.ProgramaFormacion,
+        "Estado": user.Estado,
+        "email": user.email,
+    }
+
+    # Insertar los datos en la colección de la base de datos
+    await db.Personas.insert_one(nuevo_aprendiz)
+    return {"mensaje": "Aprendiz registrado exitosamente"}
+
+###########################Endpoint para registrar un Funcionario#############################
+@app.post("/funcionario/registro")
+async def register_funcionario(user: PersonaFuncionario, db=Depends(get_db)):
+    print(f"Datos recibidos para funcionario: {user}")
+
+    # Verificar si ya existe un funcionario con el mismo número de documento
+    funcionario_existente = await db.Personas.find_one({"NumeroDocumento": user.NumeroDocumento})
+    if funcionario_existente:
+        raise HTTPException(status_code=400, detail="El funcionario ya existe")
+    
+    # Crear un nuevo Funcionario con los datos proporcionados
+    nuevo_funcionario = {
+        "Nombres": user.Nombres,
+        "Apellidos": user.Apellidos,
+        "TipoSangre": user.TipoSangre,
+        "Rol":user.Rol,
+        "NumeroDocumento": user.NumeroDocumento,
+        "ProgramaFormacion": user.ProgramaFormacion,
+        "Estado": user.Estado,
+        "email": user.email,
+    }
+
+    # Insertar los datos en la colección de la base de datos
+    await db.Personas.insert_one(nuevo_funcionario)
+    return {"mensaje": "Funcionario registrado exitosamente"}
+
+###################### Endpoint para registrar  Visitante ################################
+@app.post("/visitante/registro")
+async def register_visitante(user: PersonaVisitante, db=Depends(get_db)):
+    print(f"Datos recibidos para visitante: {user}")
+
+    # Verificar si ya existe un visitante con el mismo número de documento
+    visitante_existente = await db.Personas.find_one({"NumeroDocumento": user.NumeroDocumento})
+    if visitante_existente:
+        raise HTTPException(status_code=400, detail="El visitante ya existe")
+    
+    # Crear un nuevo visitante con los datos proporcionados
+    nuevo_visitante = {
+        "Nombres": user.Nombres,
+        "Apellidos": user.Apellidos,
+        "Rol":user.Rol,
+        "TipoSangre": user.TipoSangre,
+        "NumeroDocumento": user.NumeroDocumento,
+        "LugarEstablecido": user.LugarEstablecido,
+        "Estado": user.Estado,
+        "email": user.email,
+    }
+
+    # Insertar los datos en la colección de la base de datos
+    await db.Personas.insert_one(nuevo_visitante)
+    return {"mensaje": "Visitante registrado exitosamente"}
+
+########################Endpoint para registrar eventos ########################################
+@app.post("/eventos/registro")
+async def register_evento(evento: EventoCreate, db=Depends(get_db)):
+    print(f"Datos recibidos para evento: {evento}")
+
+    # Verificar si ya existe un evento con el mismo número de documento
+    evento_existente = await db.Eventos.find_one({"NumeroDocumento": evento.NumeroDocumento})
+    if evento_existente:
+        raise HTTPException(status_code=400, detail="El evento ya existe")
+
+    # Crear un nuevo evento con los datos proporcionados
+    nuevo_evento =  {
+        "Nombres": evento.Nombres,
+        "Apellidos": evento.Apellidos,
+        "TipoDocumento": evento.TipoDocumento,
+        "NumeroDocumento": evento.NumeroDocumento,
+        "Lugar":evento.Lugar,
+        "Email": evento.Email,
+        "TipoElemento": evento.TipoElemento,
+        "TipoVehiculo": evento.TipoVehiculo,
+        "Placa": evento.Placa,
+        "fechaIngreso": evento.fechaIngreso,
+        "fechaLimite": evento.fechaLimite,
+        
+    }
+
+    # Insertar el nuevo evento en la base de datos
+    await db.Eventos.insert_one(nuevo_evento)
+    return {"mensaje": "Evento registrado exitosamente"}
+
+######################## Endpoint para registrar Elementos ########################################
+@app.post("/elementos/registro")
+async def register_elemento(elemento: ElementoCreate, db=Depends(get_db)):
+    print(f"Datos recibidos para el elemento: {elemento}")
+    
+    # Verificar si el elemento ya existe en la base de datos por su SerialElemento
+    elemento_existente = await db.Elementos.find_one({"SerialElemento": elemento.SerialElemento})
+    if (elemento_existente):
+        raise HTTPException(status_code=400, detail="El elemento ya existe")
+    
+    # Crear un nuevo elemento con los datos proporcionados
+    nuevo_elemento = {
+        "TipoElemento": elemento.TipoElemento,
+        "Color": elemento.Color,
+        "CantidadElemento": elemento.CantidadElemento,
+        "SerialElemento": elemento.SerialElemento,
+    }
+    
+    # Insertar el nuevo elemento en la base de datos
+    await db.Elementos.insert_one(nuevo_elemento)
+    return {"mensaje": "Elemento registrado exitosamente"}
+
+################################### Endpoint para registrar un nuevo espacio o vehículo en el parqueadero #######################
+@app.post("/estacionamiento/registro")
+async def registrar_estacionamiento(estacionamiento: EstacionamientoCreate, db=Depends(get_db)):
+    print(f"Datos recibidos para el registro de estacionamiento: {estacionamiento}")
+
+    # Verificar si el espacio ya existe
+    espacio_existente = await db.Estacionamiento.find_one({"numeroEstacionamiento": estacionamiento.numeroEstacionamiento})
+    if espacio_existente:
+        raise HTTPException(status_code=400, detail="El espacio ya está registrado")
+
+    # Crear el nuevo espacio con los datos proporcionados
+    nuevo_espacio = {
+        "numeroEstacionamiento": estacionamiento.numeroEstacionamiento,
+        "tipoVehiculo": estacionamiento.tipoVehiculo,
+        "placa": estacionamiento.placa,
+        "Estado": estacionamiento.Estado
+    }
+
+    # Insertar el nuevo espacio en la base de datos
+    await db.Estacionamiento.insert_one(nuevo_espacio)
+
+    return {"mensaje": "Espacio registrado exitosamente"}
+
+
+############################################ (Llamar) GET ############################################
+
+# Endpoint para obtener el estado de todos los espacios de estacionamiento
+@app.get("/estacionamiento")
+async def get_all_estacionamientos(db=Depends(get_db)):
+    print("Consultando todos los espacios de estacionamiento")
+
+    # Buscar todos los espacios de estacionamiento en la base de datos
+    espacios = await db.Estacionamiento.find().to_list(None)
+    if not espacios:
+        raise HTTPException(status_code=404, detail="No se encontraron espacios de estacionamiento")
+
+    # Retornar la lista de espacios y sus estados
+    return [{"numeroEstacionamiento": espacio["numeroEstacionamiento"], "Estado": espacio["Estado"]} for espacio in espacios]
+
+
+############################### Usuario ##################################
+
+@app.get("/inicio_sesion")
+async def iniciar_sesion(
+    Email: str = Query(..., description="El nombre de usuario"),
+    Contrasenia: str = Query(..., description="La contraseña"),
+    db=Depends(get_db)
+):
+    usuario_existente = await db.Usuarios.find_one({"Email": Email})
+    if not usuario_existente:
+        raise HTTPException(status_code=400, detail="Usuario no encontrado")
+
+    hashed_password = usuario_existente["Contrasenia"]
+    if not bcrypt.checkpw(Contrasenia.encode('utf-8'), hashed_password.encode('utf-8')):
+        raise HTTPException(status_code=400, detail="Contraseña incorrecta")
+
+    return {"mensaje": "Inicio de sesión exitoso"}
+

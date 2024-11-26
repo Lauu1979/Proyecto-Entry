@@ -14,4 +14,4 @@ async def get_db():
     try:
         yield db
     finally: 
-        client.close()
+        pass

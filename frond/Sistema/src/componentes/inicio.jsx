@@ -1,27 +1,25 @@
 import React, { Component } from "react";
 import "../utiles/css/inicio.css";
 import axios from "axios";
-import md5 from "md5";
 import Cookies from "universal-cookie";
 import { CgMail } from "react-icons/cg";
 import { MdOutlineNoEncryptionGmailerrorred } from "react-icons/md";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
-const baseUrl = "http://localhost:3001/Registro_usuarios";
+const baseURL = "http://localhost:8000/inicio_sesion";
 const cookies = new Cookies();
 
 class Inicio extends Component {
   state = {
     form: {
-      usuario: "",
-      contrasenia: "",
+      Email: "",
+      Contrasenia: "",
     },
     error: false,
     errorMsg: "",
-    show: false, // Añadido estado para mostrar/ocultar contraseña
+    show: false,
   };
 
-  // Método para alternar el estado de mostrar/ocultar contraseña
   handleClick = () => {
     this.setState((prevState) => ({
       show: !prevState.show,
@@ -30,8 +28,8 @@ class Inicio extends Component {
 
   manejadorSubmit = async (e) => {
     e.preventDefault();
-    const { usuario, contrasenia } = this.state.form;
-    if (!usuario || !contrasenia) {
+    const { Email, Contrasenia } = this.state.form;
+    if (!Email || !Contrasenia) {
       this.setState({
         error: true,
         errorMsg: "Por favor ingrese un usuario y contraseña",
@@ -60,19 +58,20 @@ class Inicio extends Component {
 
   iniciarSesion = async () => {
     try {
-      const response = await axios.get(baseUrl, {
+      const response = await axios.get(baseURL, {
         params: {
-          usuario: this.state.form.usuario,
-          contrasenia: md5(this.state.form.contrasenia),
+          Email: this.state.form.Email,
+          Contrasenia: this.state.form.Contrasenia,
         },
       });
 
-      console.log(response.data)
+      console.log(response.data);
 
-      if (response.data.length > 0) {
-        const respuesta = response.data[0];
-        cookies.set("id", respuesta.id, { path: "/" });
-        cookies.set("usuario", respuesta.usuario, { path: "/" });
+      if (
+        response.data &&
+        response.data.mensaje === "Inicio de sesión exitoso"
+      ) {
+        cookies.set("usuario", this.state.form.Email, { path: "/" });
         window.location.href = "./Bienvenida";
       } else {
         this.setState({
@@ -116,9 +115,9 @@ class Inicio extends Component {
                 Usuario
               </label>
               <input
-                type="text"
+                type="email"
                 className="fadeIn second"
-                name="usuario"
+                name="Email"
                 onChange={this.manejadorChange}
                 required
               />
@@ -131,9 +130,9 @@ class Inicio extends Component {
                 Contraseña
               </label>
               <input
-                type={show ? "text" : "password"} // Llama la función para mostrar y ocultar contraseña
+                type={show ? "text" : "password"}
                 className="fadeIn third"
-                name="contrasenia"
+                name="Contrasenia"
                 onChange={this.manejadorChange}
                 required
               />
@@ -141,7 +140,7 @@ class Inicio extends Component {
                 style={{ position: "absolute", top: "50%", fontSize: "30px" }}
               />
               <p
-                onClick={this.handleClick} // Llama la función del botón para mostrar y ocultar contraseña
+                onClick={this.handleClick}
                 style={{
                   position: "absolute",
                   right: "12%",
@@ -151,8 +150,7 @@ class Inicio extends Component {
                   transition: "300ms",
                 }}
               >
-                {show ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}{" "}
-                {/* Aquí se manejan los iconos */}
+                {show ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
               </p>
               <br />
               {error && (

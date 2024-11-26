@@ -5,19 +5,17 @@ import swal from "sweetalert";
 
 const Registro = () => {
   const [mensaje, setMensaje] = useState("");
-  const [
-    formData,
-    setFormData,
-    baseURL = "http://localhost:3001/Registro_usuarios",
-  ] = useState({
+  const [formData, setFormData] = useState({
     Nombres: "",
     Apellidos: "",
     NumeroDocumento: "",
     Telefono: "",
-    usuario: "",
+    Email: "", 
     Contrasenia: "",
     Confirmar: "",
   });
+
+  const baseURL = "http://localhost:8000/inicio_sesion/registro";
 
   const validateLetters = (e) => {
     e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, "");
@@ -34,6 +32,7 @@ const Registro = () => {
       [name]: value,
     });
   };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (formData.Contrasenia !== formData.Confirmar) {
@@ -42,16 +41,23 @@ const Registro = () => {
     }
 
     try {
-      const response = await axios.post(baseURL, formData);
-      if (response.status === 201) {
+      const response = await axios.post(baseURL, {
+        Nombres: formData.Nombres,
+        Apellidos: formData.Apellidos,
+        NumeroDocumento: formData.NumeroDocumento,
+        Telefono: formData.Telefono,
+        Email: formData.Email,
+        Contrasenia: formData.Contrasenia,
+      });
+      if (response.status === 200) {
         estaAlerta();
       } else {
-        alert("Error de registro");
+        setMensaje("Error de registro");
         console.error(response.data);
       }
     } catch (error) {
       console.error(error);
-      alert("Error de conexion al servidor");
+      setMensaje("Error de conexión al servidor");
     }
   };
 
@@ -59,18 +65,19 @@ const Registro = () => {
     swal({
       title: "Registro Exitoso",
       icon: "success",
-      time: "10s",
+      timer: 10000,
       button: "OK",
     });
     window.location.href = "/";
   };
+
   return (
     <form onSubmit={handleSubmit}>
       <div>
         <img
           src="https://lh3.googleusercontent.com/p/AF1QipNjbxKjSgdYd0MjtGLkVOmpq4GtLQx8rnIyP063=s680-w680-h510"
           className="logo1"
-          alt="Loogo"
+          alt="Logo"
         />
       </div>
       <div className="container">
@@ -84,8 +91,8 @@ const Registro = () => {
               <input
                 type="text"
                 name="Nombres"
-                 maxLength="20"
-                 onInput={validateLetters}
+                maxLength="20"
+                onInput={validateLetters}
                 value={formData.Nombres}
                 onChange={handleChange}
                 required
@@ -131,8 +138,8 @@ const Registro = () => {
               <label>Email</label>
               <input
                 type="email"
-                name="usuario"
-                value={formData.usuario}
+                name="Email"
+                value={formData.Email}
                 onChange={handleChange}
                 required
               />
