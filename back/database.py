@@ -2,11 +2,16 @@ from motor.motor_asyncio import AsyncIOMotorClient #Se utiliza para establecer c
 from fastapi import Depends
 from pymongo import MongoClient
 
+uri = "mongodb+srv://laurabohorquezpabon123:pBW3LjPURK95f3um@cluster0.4gmxd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
-MONGODB_URL = "mongodb://localhost:27017/Entry-Solution"
+client = MongoClient(uri)
 
-client = AsyncIOMotorClient(MONGODB_URL)
-db = client["Entry-Solution"]
+# Prueba de conexión
+try:
+    client.admin.command('ping')
+    print("Conexión exitosa a MongoDB")
+except Exception as e:
+    print(f"Error en la conexión a MongoDB: {e}")
 
 
 
