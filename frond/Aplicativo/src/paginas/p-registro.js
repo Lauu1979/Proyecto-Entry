@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Button } from "@mui/material";
+import React, { useState } from "react";
 import "../utiles/p-registro.css";
+import axios from "axios";
 
 function Registro() {
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showForm, setShowForm] = useState(false);
   const [selectedRol, setSelectedRol] = useState("Aprendiz");
   const [vehicleError, setVehicleError] = useState(false);
   const [selectedVehicleType, setSelectedVehicleType] = useState("n/a");
@@ -17,6 +18,35 @@ function Registro() {
   ]);
   const [showModal, setShowModal] = useState(false);
   const [newElementType, setNewElementType] = useState("");
+
+  // Buscar número de documento
+  const [numeroDocumento, setNumeroDocumento] = useState("");
+  const [nombres, setNombres] = useState("");
+  const [apellidos, setApellidos] = useState("");
+  const [mensaje, setMensaje] = useState("");
+
+  const buscarUsuario = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8000/PreRegistro/registro/buscar?documento=${numeroDocumento}`
+      );
+      const data = response.data;
+      if (data.usuarioEncontrado) {
+        setNombres(data.nombres);
+        setApellidos(data.apellidos);
+        setMensaje("Usuario encontrado");
+        setShowForm(false);
+      } else {
+        setNombres("");
+        setApellidos("");
+        setMensaje("Usuario no encontrado");
+        setShowForm(true);
+      }
+    } catch (error) {
+      setMensaje("Error al buscar usuario");
+      setShowForm(true);
+    }
+  };
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -121,7 +151,7 @@ function Registro() {
       NumeroDocumento: e.target.NumeroDocumento.value,
       FichaFormacion: codigoFicha || undefined,
       ProgramaFormacion: e.target.ProgramaFormacion.value,
-      email: email,
+      Email: email,
       tipoElemento: selectedElementType,
       vehiculo: selectedVehicleType,
       cantidadElemento: e.target.cantidadElemento?.value,
@@ -144,18 +174,28 @@ function Registro() {
       rol: selectedRol,
     };
 
-    const endpoint = "http://localhost:8000/Personas";
+    const endpointPreRegistro = "http://localhost:8000/PreRegistro/registro";
+    const endpointElemento = "http://localhost:8000/elementos/registro";
 
     try {
-      const response = await fetch(endpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+      // Registrar en PreRegistro
+      const responsePreRegistro = await axios.post(
+        endpointPreRegistro,
+        formData
+      );
+
+      // Registrar en Elementos
+      const responseElemento = await axios.post(endpointElemento, {
+        TipoElemento: selectedElementType,
+        CantidadElemento: formData.cantidadElemento,
+        Color: formData.colorElemento,
+        SerialElemento: formData.serialElemento,
       });
 
-      if (response.ok) {
+      if (
+        responsePreRegistro.status === 200 &&
+        responseElemento.status === 200
+      ) {
         setShowSuccess(true);
         setTimeout(() => {
           window.location.reload();
@@ -180,286 +220,24 @@ function Registro() {
       </header>
       <h1>Pre-Registro</h1>
 
-      <form onSubmit={handleSubmit}>
-        {/* Fila 1: Nombres y Apellidos */}
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="nombres">Nombres:</label>
-            <input
-              type="text"
-              maxLength="25"
-              id="nombres"
-              name="nombres"
-              onInput={validateLetters}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="apellidos">Apellidos:</label>
-            <input
-              type="text"
-              id="apellidos"
-              name="apellidos"
-              maxLength="25"
-              onInput={validateLetters}
-              required
-            />
-          </div>
-        </div>
-        {/* Fila 2: Tipo de Documento y Número de Documento */}
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="tipoDocumento">Tipo de Documento:</label>
-            <select id="tipoDocumento" name="tipoDocumento" required>
-              <option value="C.C">C.C</option>
-              <option value="T.I">T.I</option>
-              <option value="P.P.T">P.P.T</option>
-            </select>
-          </div>
-          <div className="form-group">
-            <label htmlFor="numeroDocumento">Número de Documento:</label>
-            <input
-              type="text"
-              id="numeroDocumento"
-              name="numeroDocumento"
-              maxLength="10"
-              onInput={validateNumeric}
-              required
-            />
-          </div>
-        </div>
-
+      {/* Fila 1: Nombres y Apellidos */}
+      <div className="form-row">
         <div className="form-group">
-          <label>Email:</label>
+          <label htmlFor="nombres">Numero de documento: </label>
           <input
-            type="email"
-            value={email}
-            onChange={handleEmailChange}
+            type="text"
+            maxLength="10"
+            id="nombres"
+            name="nombres"
+            onInput={validateNumeric}
             required
+            value={numeroDocumento}
+            onChange={(e) => setNumeroDocumento(e.target.value)}
           />
-          {error && <p className="error">{error}</p>}
+          <button onClick={buscarUsuario}>Buscar</button>
+          <p>{mensaje}</p>
         </div>
-
-        {/* Fila 3: TipoSangre y Programa  */}
-
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="tipoSangre">Tipo de Sangre:</label>
-            <select
-              type="text"
-              id="tipoSangre"
-              name="tipoSangre"
-              onChange={handleVehicleTypeChange}
-              value={selectedVehicleType}
-            >
-              <option value="O-">O-</option>
-              <option value="O+">O+</option>
-              <option value="A+">A+</option>
-              <option value="AB+">AB+</option>
-              <option value="B+">B+</option>
-              <option value="A-">A-</option>
-            </select>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="nombrePrograma">Nombre del Programa:</label>
-            <input
-              type="text"
-              id="nombrePrograma"
-              name="nombrePrograma"
-              maxLength="30"
-              onInput={validateLetters}
-              required
-            />
-          </div>
-        </div>
-
-        {/* Fila 4: Rol y Ficha */}
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="rol">Rol:</label>
-            <select id="rol" value={selectedRol} onChange={handleRolChange}>
-              <option value="Aprendiz">Aprendiz</option>
-              <option value="Funcionario">Funcionario</option>
-            </select>
-          </div>
-          {selectedRol === "Aprendiz" && (
-            <div className="form-group">
-              <label htmlFor="codigoFicha">Número de Ficha:</label>
-              <input
-                type="text"
-                id="codigoFicha"
-                name="codigoFicha"
-                onInput={validateAlphanumeric}
-                required
-              />
-            </div>
-          )}
-        </div>
-
-        {/* Fila 5: Tipo de Elemento y Tipo de Vehículo */}
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="tipoElemento">Tipo de Elemento:</label>
-            <select
-              id="tipoElemento"
-              name="tipoElemento"
-              onChange={handleElementTypeChange}
-              value={selectedElementType}
-            >
-              <option value="n/a">Seleccione...</option>
-              {elementTypes.map((type, index) => (
-                <option key={index} value={type}>
-                  {type}
-                </option>
-              ))}
-              <option value="otro">Otro...</option>{" "}
-              {/* Opción para abrir el modal */}
-            </select>
-          </div>
-          <div className="form-group">
-            <label htmlFor="vehiculo">Tipo de Vehículo:</label>
-            <select
-              id="vehiculo"
-              name="vehiculo"
-              onChange={handleVehicleTypeChange}
-              value={selectedVehicleType}
-            >
-              <option value="n/a">Seleccione...</option>
-              <option value="oficial">Oficial</option>
-              <option value="Carro">Carro</option>
-              <option value="Moto">Moto</option>
-              <option value="Bicicleta">Bicicleta</option>
-            </select>
-            {vehicleError && (
-              <span className="error-message">
-                Error: Los aprendices no pueden usar vehículos oficiales o
-                carros.
-              </span>
-            )}
-          </div>
-
-          {/* Fila 6: Color y Serial */}
-          {selectedElementType !== "n/a" && (
-            <>
-              <div className="form-group">
-                <label htmlFor="colorElemento">Color de Elemento:</label>
-                <input
-                  type="text"
-                  id="colorElemento"
-                  name="colorElemento"
-                  maxLength="10"
-                  onInput={validateLetters}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="serialElemento">Serial de Elemento:</label>
-                <input
-                  type="text"
-                  id="serialElemento"
-                  name="serialElemento"
-                  maxLength="10"
-                  onInput={validateAlphanumeric}
-                  required
-                />
-              </div>
-            </>
-          )}
-
-          {selectedVehicleType !== "n/a" && (
-            <>
-              <div className="form-group">
-                <label htmlFor="colorElemento">Color del Vehiculo:</label>
-                <input
-                  type="text"
-                  id="colorElemento"
-                  name="colorElemento"
-                  maxLength="10"
-                  onInput={validateLetters}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="serialElemento">Placa del Vehiculo:</label>
-                <input
-                  type="text"
-                  id="serialElemento"
-                  maxLength="6"
-                  name="serialElemento"
-                  onInput={validateAlphanumeric}
-                  required
-                />
-              </div>
-            </>
-          )}
-        </div>
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          style={{
-            backgroundColor: "green",
-            right: "-1%",
-          }}
-        >
-          Guardar
-        </Button>
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          className="boton.volver"
-          onClick={() => (window.location.href = "/")}
-          style={{
-            backgroundColor: "green",
-            left: "62%",
-          }}
-        >
-          Volver
-        </Button>
-
-        {showModal && (
-          <div className="form-group">
-            <div className="modal">
-              <div className="modal-content">
-                <h3>Agregar Tipo de Elemento</h3>
-                <input
-                  type="text"
-                  maxLength="20"
-                  onInput={validateLetters}
-                  value={newElementType}
-                  onChange={handleNewElementTypeChange}
-                  placeholder="Ingrese el nuevo tipo de elemento"
-                />
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleAddNewElementType}
-                  style={{
-                    backgroundColor: "green",
-                    margin: "10px", // Ajustar espacio entre botones
-                  }}
-                >
-                  Agregar
-                </Button>
-
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleModalClose}
-                  style={{
-                    backgroundColor: "red",
-                    margin: "10px", // Ajustar espacio entre botones
-                  }}
-                >
-                  Cerrar
-                </Button>
-              </div>
-            </div>
-          </div>
-        )}
-      </form>
+      </div>
 
       {showSuccess && <div className="success-message">¡Registro exitoso!</div>}
     </div>

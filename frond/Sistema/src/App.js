@@ -9,7 +9,7 @@ import Menu from "./componentes/menu";
 import Registroapre from "./paginas/registroAprendiz";
 import Registrofuncionari from "./paginas/registroFuncionari";
 import Registrovisi from "./paginas/registroVisitante";
-import  RegistroEvento from "./paginas/registroEventos";
+import RegistroEvento from "./paginas/registroEventos";
 import Registroelemen from "./paginas/registroelemento";
 import Parqueaderocarros from "./paginas/parqueaderoC";
 import Parqueaderomotos from "./paginas/parqueaderoM";
@@ -22,6 +22,10 @@ import ReporteAprendiz from "./paginas/reporteAprendiz";
 import ReporteFuncionario from "./paginas/reporteFuncionario";
 import ReporteVisitante from "./paginas/reporteVisitante";
 import Eventos from "./paginas/eventos";
+import Aprendiz from "./paginas/Aprendices";
+import Funcionario from "./paginas/Funcionarios";
+import RegistroFuncionario from "./paginas/registroFuncionari";
+import Visitantes from "./paginas/Visitantes";
 
 function App() {
   return (
@@ -36,13 +40,16 @@ function App() {
           <Route path="/Menu" exact element={<Menu />} />
           <Route path="/RegistroAprendiz" exact element={<Registroapre />} />
           <Route path="/eventos" exact element={<Eventos />} />
+          <Route path="/Aprendices" exact element={<Aprendiz />} />
+          <Route path="/Funcionarios" exact element={<Funcionario />} />
+          <Route path="/Visitantes" exact element={<Visitantes/>} />
           <Route
             path="/RegistroFuncionario"
             exact
-            element={<Registrofuncionari />}
+            element={<RegistroFuncionario />}
           />
           <Route path="/RegistroVisitante" exact element={<Registrovisi />} />
-          <Route path="/RegistroEvento" exact element={<RegistroEvento/>}/>
+          <Route path="/RegistroEvento" exact element={<RegistroEvento />} />
           <Route path="/RegistroElemento" exact element={<Registroelemen />} />
           <Route
             path="/ParqueaderoCarros"

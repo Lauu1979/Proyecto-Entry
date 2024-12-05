@@ -22,66 +22,74 @@ const ReporteAprendiz = () => {
               <br />
               <div className="form-row">
                 <div className="form-group">
-                <div className="input-box">
-                <label htmlFor="año">Año:</label>
-                <select id="año" name="año">
-                  <option value="2024">2024</option>
-                  <option value="2013">2013</option>
-                  <option value="2009">2009</option>
-                  <option value="otro">Otro</option>
-                </select>
+                  <div className="input-box">
+                    <label htmlFor="año">Año:</label>
+                    <select id="año" name="año">
+                      <option value="2024">2024</option>
+                      <option value="2013">2013</option>
+                      <option value="2009">2009</option>
+                      <option value="otro">Otro</option>
+                    </select>
+                  </div>
+                </div>
+                <br />
+                <div className="form-group">
+                  <div className="input-box">
+                    <label htmlFor="mes">Mes:</label>
+                    <select id="mes" name="mes">
+                      <option value="ENERO">ENERO</option>
+                      <option value="FEBRERO">FEBRERO</option>
+                      <option value="MARZO">MARZO</option>
+                      <option value="ABRIL">ABRIL</option>
+                      <option value="MAYO">MAYO</option>
+                      <option value="JUNIO">JUNIO</option>
+                      <option value="JULIO">JULIO</option>
+                      <option value="AGOSTO">AGOSTO</option>
+                      <option value="SEPTIEMBRE">SEPTIEMBRE</option>
+                      <option value="OCTUBRE">OCTUBRE</option>
+                      <option value="NOMBIENMBRE">NOMBIENMBRE</option>
+                      <option value="DICIEMBRE">DICIEMBRE</option>
+                    </select>
+                  </div>
+                </div>
               </div>
+              <br />
+
+              <div className="form-row">
+                <div className="form-group">
+                  <div className="input-box">
+                    <label htmlFor="dia">Día:</label>
+                    <select id="dia" name="dia">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="otro">Otro</option>
+                    </select>
+                  </div>
+                </div>
+                <br />
+                <div className="form-group">
+                  <div className="input-box">
+                    <label htmlFor="semana">Semana:</label>
+                    <select id="semana" name="semana">
+                      <option value="1">Semana 1</option>
+                      <option value="2">Semana 2</option>
+                      <option value="3">Semana 3</option>
+                      <option value="4">Semana 4</option>
+                      <option value="otro">Otro</option>
+                    </select>
+                  </div>
+                </div>
               </div>
               <br />
               <div className="form-group">
-              <div className="input-box">
-                <label htmlFor="mes">Mes:</label>
-                <select id="mes" name="mes">
-                  <option value="JULIO">JULIO</option>
-                  <option value="DICIEMBRE">DICIEMBRE</option>
-                  <option value="ENERO">ENERO</option>
-                  <option value="Otro">Otro</option>
-                </select>
-              </div>
-              </div>
-              </div>
-              <br />
-              
-            <div className="form-row">
-              <div className="form-group">
-              <div className="input-box">
-                <label htmlFor="dia">Día:</label>
-                <select id="dia" name="dia">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
+                <label htmlFor="tipoElemento">Tipo de Elemento:</label>
+                <select id="tipoElemento" name="tipoElemento">
+                  <option value="Computador">Computador</option>
+                  <option value="Raquetas">Raquetas</option>
+                  <option value="Tablet">Tablet</option>
                   <option value="otro">Otro</option>
                 </select>
-              </div>
-              </div>
-              <br /> 
-              <div className="form-group">
-              <div className="input-box">
-                <label htmlFor="semana">Semana:</label>
-                <select id="semana" name="semana">
-                  <option value="1">Semana 1</option>
-                  <option value="2">Semana 2</option>
-                  <option value="3">Semana 3</option>
-                  <option value="4">Semana 4</option>
-                  <option value="otro">Otro</option>
-                </select>
-              </div>
-              </div>
-              </div>
-              <br />
-              <div className="form-group">
-              <label htmlFor="tipoElemento">Tipo de Elemento:</label>
-              <select id="tipoElemento" name="tipoElemento">
-                <option value="Computador">Computador</option>
-                <option value="Raquetas">Raquetas</option>
-                <option value="Tablet">Tablet</option>
-                <option value="otro">Otro</option>
-              </select>
               </div>
               <br />
               <br />
@@ -106,4 +114,3 @@ const ReporteAprendiz = () => {
 };
 
 export default ReporteAprendiz;
-

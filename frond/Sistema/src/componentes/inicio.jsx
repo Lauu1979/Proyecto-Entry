@@ -90,6 +90,7 @@ class Inicio extends Component {
 
   render() {
     const { show, error, errorMsg } = this.state;
+
     return (
       <React.Fragment>
         <img src="logoSenaNaranja.png" alt="Logo" className="Logo" />

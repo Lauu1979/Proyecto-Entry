@@ -1,27 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import "../utiles/css/registroA.css";
 import axios from "axios";
 import Menu from "../componentes/menu";
 import swal from "sweetalert";
-import "../utiles/css/eventos.css";
 
-const Eventos = () => {
+const Aprendiz = () => {
   const [formData, setFormData] = useState({
     Nombres: "",
     Apellidos: "",
-    TipoDocumento: "C.C",
+    TipoDocumento: "",
+    TipoSangre: "",
     NumeroDocumento: "",
-    Lugar: "",
+    FichaFormacion: "",
+    SerialElemento: "",
+    ProgramaFormacion: "",
+    Estado: "",
     Email: "",
     TipoElemento: "",
-    TipoVehiculo: "n/a",
-    Placa: "",
-    fechaIngreso: "",
-    fechaLimite: "",
+    CantidadElemento: "",
+    Color: "",
   });
 
-  const baseURL = "http://localhost:8000/eventos/registro";
-  const [placaError, setPlacaError] = useState(false);
-  const [elementTypeError, setElementTypeError] = useState(false);
+  const urlAprendiz = "http://localhost:8000/aprendiz/registro";
+  const urlElemento = "http://localhost:8000/elementos/registro";
+  const [placaError, setSerialError] = useState(false);
 
   const validateLetters = (e) => {
     e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, "");
@@ -34,9 +36,9 @@ const Eventos = () => {
   const validateAlphanumeric = (e) => {
     const value = e.target.value;
     if (/[^a-zA-Z0-9]/.test(value)) {
-      setPlacaError(true);
+      setSerialError(true);
     } else {
-      setPlacaError(false);
+      setSerialError(false);
     }
     e.target.value = value.replace(/[^a-zA-Z0-9]/g, "");
   };
@@ -47,33 +49,39 @@ const Eventos = () => {
       ...formData,
       [name]: value,
     });
-
-    // Actualizar el error de placa si cambia el valor del campo de placa
-    if (name === "Placa") {
-      validateAlphanumeric(event);
-    }
   };
+
+  const elements = formData.TipoElemento
+    ? formData.TipoElemento.split(",")
+    : [];
+  const isValid = elements.every((element) => {
+    const [item, quantity] = element.split("=").map((item) => item.trim());
+    return item && quantity && !isNaN(quantity);
+  });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Validar tipo de elemento
-    const elements = formData.TipoElemento
-      ? formData.TipoElemento.split(",")
-      : [];
-    const isValid = elements.every((element) => {
-      const [item, quantity] = element.split("=").map((item) => item.trim());
-      return item && quantity && !isNaN(quantity);
-    });
-
-    if (!isValid || placaError) {
-      setElementTypeError(!isValid);
-      return;
-    }
-
     try {
-      const response = await axios.post(baseURL, formData);
-      if (response.status === 200) {
+      const response = await axios.post(urlAprendiz, {
+        Nombres: formData.Nombres,
+        Apellidos: formData.Apellidos,
+        TipoDocumento: formData.TipoDocumento,
+        TipoSangre: formData.TipoSangre,
+        NumeroDocumento: formData.NumeroDocumento,
+        FichaFormacion: formData.FichaFormacion,
+        ProgramaFormacion: formData.ProgramaFormacion,
+        Estado: formData.Estado,
+        Email: formData.Email,
+      });
+      const elementoResponse = await axios.post(urlElemento, {
+        TipoElemento: formData.TipoElemento,
+        CantidadElemento: formData.CantidadElemento,
+        Color: formData.Color,
+        SerialElemento: formData.SerialElemento,
+      });
+
+      if (response.status === 200 && elementoResponse.status === 200) {
         swal({
           title: "Registro Exitoso",
           icon: "success",
@@ -85,15 +93,17 @@ const Eventos = () => {
         setFormData({
           Nombres: "",
           Apellidos: "",
-          TipoDocumento: "C.C",
+          TipoDocumento: "",
+          TipoSangre: "",
           NumeroDocumento: "",
-          Lugar: "",
+          FichaFormacion: "",
+          SerialElemento: "",
+          ProgramaFormacion: "",
+          Estado: "",
           Email: "",
           TipoElemento: "",
-          TipoVehiculo: "n/a",
-          Placa: "",
-          fechaIngreso: "",
-          fechaLimite: "",
+          CantidadElemento: "",
+          Color: "",
         });
       } else {
         alert("Error de registro");
@@ -108,7 +118,7 @@ const Eventos = () => {
   return (
     <div className="contenido2">
       <Menu />
-      <h1>Eventos</h1>
+      <h1>APRENDICES</h1>
       <form onSubmit={handleSubmit}>
         {/* Fila 1: Nombres y Apellidos */}
         <div className="form-row">
@@ -169,17 +179,52 @@ const Eventos = () => {
             />
           </div>
         </div>
-        {/* Fila 3: Lugar y Email */}
+        {/* Fila 3: Tipo de Sangre y Programa de Formación */}
         <div className="form-row">
           <div className="form-group">
-            <label htmlFor="Lugar">Lugar al que se dirige:</label>
+            <label htmlFor="TipoSangre">Tipo de Sangre:</label>
+            <select
+              id="TipoSangre"
+              name="TipoSangre"
+              value={formData.TipoSangre}
+              onChange={handleChange}
+              required
+            >
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label htmlFor="ProgramaFormacion">Programa de Formación:</label>
             <input
               type="text"
-              maxLength="15"
-              id="Lugar"
-              name="Lugar"
+              id="ProgramaFormacion"
+              name="ProgramaFormacion"
+              maxLength="50"
               onInput={validateLetters}
-              value={formData.Lugar}
+              value={formData.ProgramaFormacion}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
+        {/* Fila 4: Ficha y Email */}
+        <div className="form-row">
+          <div className="form-group">
+            <label htmlFor="FichaFormacion">N° Ficha:</label>
+            <input
+              id="FichaFormacion"
+              name="FichaFormacion"
+              type="text"
+              maxLength="7"
+              onInput={validateNumeric}
+              value={formData.FichaFormacion}
               onChange={handleChange}
               required
             />
@@ -197,7 +242,7 @@ const Eventos = () => {
             />
           </div>
         </div>
-        {/* Fila 4: Tipo de Elemento y Tipo de Vehículo */}
+        {/* Fila 5: Tipo de Elemento y Estado */}
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="TipoElemento">Elementos a ingresar:</label>
@@ -207,83 +252,72 @@ const Eventos = () => {
               name="TipoElemento"
               value={formData.TipoElemento}
               onChange={handleChange}
-              placeholder="Ejemplo: Computador=9,Sillas=25"
               required
             />
-            {elementTypeError && (
-              <span className="error-message">
-                Error: Por favor, ingrese los tipos de elementos separados por
-                comas y al lado la cantidad que se ingresarán.
-              </span>
-            )}
           </div>
           <div className="form-group">
-            <label htmlFor="TipoVehiculo">Tipo de Vehículo:</label>
+            <label htmlFor="Estado">Estado:</label>
             <select
-              id="TipoVehiculo"
-              name="TipoVehiculo"
-              value={formData.TipoVehiculo}
+              id="Estado"
+              name="Estado"
+              value={formData.Estado}
               onChange={handleChange}
             >
               <option value="n/a">Seleccione...</option>
-              <option value="oficial">Oficial</option>
-              <option value="Carro">Carro</option>
-              <option value="N/A">N/A</option>
+              <option value="Activo">Activo</option>
+              <option value="Inactivo">Inactivo</option>
+              <option value="Cancelado">Cancelado</option>
             </select>
           </div>
         </div>
-
-        {/* Fila 5: Serial y Placa */}
+        {/* Fila 6: Serial del Elemento */}
         <div className="form-row">
           <div className="form-group">
-            <label htmlFor="Placa">Placa del Vehículo:</label>
+            <label htmlFor="SerialElemento">Serial del Elemento:</label>
             <input
               type="text"
-              id="Placa"
+              id="SerialElemento"
               maxLength="6"
-              name="Placa"
-              value={formData.Placa}
+              name="SerialElemento"
+              value={formData.SerialElemento}
               onChange={handleChange}
               onInput={validateAlphanumeric}
-              disabled={
-                formData.TipoVehiculo !== "oficial" &&
-                formData.TipoVehiculo !== "Carro"
-              }
             />
             {placaError && (
               <span className="error-message">
-                Error: La placa solo debe contener caracteres alfanuméricos.
+                Error: El serial solo debe contener caracteres alfanuméricos.
               </span>
             )}
           </div>
         </div>
-
-        {/* Fila 6: Fechas de Ingreso y Salida */}
+        {/* Fila 7: Cantidad y Color */}
         <div className="form-row">
           <div className="form-group">
-            <label htmlFor="FechaIngreso">Fecha de Ingreso:</label>
+            <label htmlFor="CantidadElemento">Cantidad:</label>
             <input
-              type="date"
-              id="FechaIngreso"
-              name="fechaIngreso"
-              value={formData.fechaIngreso}
+              id="CantidadElemento"
+              name="CantidadElemento"
+              type="text"
+              maxLength="7"
+              onInput={validateNumeric}
+              value={formData.CantidadElemento}
               onChange={handleChange}
               required
             />
           </div>
           <div className="form-group">
-            <label htmlFor="fechaLimite">Fecha Límite:</label>
+            <label htmlFor="Color">Color:</label>
             <input
-              type="date"
-              id="fechaLimite"
-              name="fechaLimite"
-              value={formData.fechaLimite}
+              type="text"
+              name="Color"
+              maxLength="10"
+              value={formData.Color}
+              onInput={validateLetters}
               onChange={handleChange}
               required
             />
           </div>
         </div>
-
         <div className="form-row">
           <button className="boton-evento" type="submit">
             Guardar
@@ -294,4 +328,4 @@ const Eventos = () => {
   );
 };
 
-export default Eventos;
+export default Aprendiz;

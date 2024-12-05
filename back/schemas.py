@@ -39,11 +39,21 @@ class PersonaAprendiz(BaseModel):
     TipoSangre: str
     TipoDocumento: str
     NumeroDocumento: str
-    Rol: str
     FichaFormacion: Optional[str] = None
     ProgramaFormacion: str
     Estado: str
-    email: str
+    Email: str
+
+class PreRegistro(BaseModel):
+    Nombres: str
+    Apellidos: str
+    TipoSangre: str
+    TipoDocumento: str
+    NumeroDocumento: str
+    FichaFormacion: Optional[str] = None
+    ProgramaFormacion: str
+    Estado: str
+    Email: str
 
 class PersonaFuncionario(BaseModel):
     Nombres: str
@@ -51,10 +61,9 @@ class PersonaFuncionario(BaseModel):
     TipoSangre: str
     TipoDocumento: str
     NumeroDocumento: str
-    Rol: str
-    ProgramaFormacion: str
+    Area: str
     Estado: str
-    email: str
+    Email: str
 
 class PersonaVisitante(BaseModel):
     Nombres: str
@@ -62,10 +71,9 @@ class PersonaVisitante(BaseModel):
     TipoSangre: str
     TipoDocumento: str
     NumeroDocumento: str
-    Rol: str
     LugarEstablecido: str
     Estado: str
-    email: str
+    Email: str
 
 
     

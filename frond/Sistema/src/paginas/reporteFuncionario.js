@@ -23,11 +23,19 @@ const ReporteFuncionario = () => {
                 <div className="form-group">
                   <div className="input-box">
                     <label htmlFor="año">Año:</label>
-                    <select id="año" name="año">
-                      <option value="2024">2024</option>
-                      <option value="2013">2013</option>
-                      <option value="2009">2009</option>
-                      <option value="otro">Otro</option>
+                    <select id="mes" name="mes">
+                      <option value="ENERO">ENERO</option>
+                      <option value="FEBRERO">FEBRERO</option>
+                      <option value="MARZO">MARZO</option>
+                      <option value="ABRIL">ABRIL</option>
+                      <option value="MAYO">MAYO</option>
+                      <option value="JUNIO">JUNIO</option>
+                      <option value="JULIO">JULIO</option>
+                      <option value="AGOSTO">AGOSTO</option>
+                      <option value="SEPTIEMBRE">SEPTIEMBRE</option>
+                      <option value="OCTUBRE">OCTUBRE</option>
+                      <option value="NOMBIENMBRE">NOMBIENMBRE</option>
+                      <option value="DICIEMBRE">DICIEMBRE</option>
                     </select>
                   </div>
                 </div>

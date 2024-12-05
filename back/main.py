@@ -1,9 +1,9 @@
 from fastapi import FastAPI, Depends, HTTPException, Query
-from models import Usuarios,Personas
-from schemas import UsuarioCreate,PersonaAprendiz,PersonaFuncionario, PersonaVisitante,EventoCreate,ElementoCreate,EstacionamientoCreate,UsuarioLogin
+from models import Usuarios
+from schemas import UsuarioCreate,PersonaAprendiz,PersonaFuncionario, PreRegistro,PersonaVisitante,EventoCreate,ElementoCreate,EstacionamientoCreate
 from database import get_db
 from fastapi.middleware.cors import CORSMiddleware
-import bcrypt
+import bcrypt, logging
 
 app = FastAPI()
 
@@ -54,26 +54,25 @@ async def register_aprendiz(user: PersonaAprendiz, db=Depends(get_db)):
     print(f"Datos recibidos para aprendiz: {user}")
 
     # Verificar si ya existe un aprendiz con el mismo número de documento
-    aprendiz_existente = await db.Personas.find_one({"NumeroDocumento": user.NumeroDocumento})
+    aprendiz_existente = await db.Aprendices.find_one({"NumeroDocumento": user.NumeroDocumento})
     if aprendiz_existente:
         raise HTTPException(status_code=400, detail="El aprendiz ya existe")
     
     # Crear un nuevo Aprendiz con los datos proporcionados
     nuevo_aprendiz = {
-        "Nombres": user.Nombres,
+         "Nombres": user.Nombres,
         "Apellidos": user.Apellidos,
         "TipoSangre": user.TipoSangre,
         "TipoDocumento": user.TipoDocumento,
         "NumeroDocumento": user.NumeroDocumento,
-        "Rol":user.Rol,
         "FichaFormacion": user.FichaFormacion,
         "ProgramaFormacion": user.ProgramaFormacion,
         "Estado": user.Estado,
-        "email": user.email,
+        "Email": user.Email,
     }
-
+   
     # Insertar los datos en la colección de la base de datos
-    await db.Personas.insert_one(nuevo_aprendiz)
+    await db.Aprendices.insert_one(nuevo_aprendiz)
     return {"mensaje": "Aprendiz registrado exitosamente"}
 
 ###########################Endpoint para registrar un Funcionario#############################
@@ -82,7 +81,7 @@ async def register_funcionario(user: PersonaFuncionario, db=Depends(get_db)):
     print(f"Datos recibidos para funcionario: {user}")
 
     # Verificar si ya existe un funcionario con el mismo número de documento
-    funcionario_existente = await db.Personas.find_one({"NumeroDocumento": user.NumeroDocumento})
+    funcionario_existente = await db.Funcionarios.find_one({"NumeroDocumento": user.NumeroDocumento})
     if funcionario_existente:
         raise HTTPException(status_code=400, detail="El funcionario ya existe")
     
@@ -91,15 +90,15 @@ async def register_funcionario(user: PersonaFuncionario, db=Depends(get_db)):
         "Nombres": user.Nombres,
         "Apellidos": user.Apellidos,
         "TipoSangre": user.TipoSangre,
-        "Rol":user.Rol,
+        "TipoDocumento": user.TipoDocumento,
         "NumeroDocumento": user.NumeroDocumento,
-        "ProgramaFormacion": user.ProgramaFormacion,
+        "Area": user.Area,
         "Estado": user.Estado,
-        "email": user.email,
+        "Email": user.Email,
     }
 
     # Insertar los datos en la colección de la base de datos
-    await db.Personas.insert_one(nuevo_funcionario)
+    await db.Funcionarios.insert_one(nuevo_funcionario)
     return {"mensaje": "Funcionario registrado exitosamente"}
 
 ###################### Endpoint para registrar  Visitante ################################
@@ -108,7 +107,7 @@ async def register_visitante(user: PersonaVisitante, db=Depends(get_db)):
     print(f"Datos recibidos para visitante: {user}")
 
     # Verificar si ya existe un visitante con el mismo número de documento
-    visitante_existente = await db.Personas.find_one({"NumeroDocumento": user.NumeroDocumento})
+    visitante_existente = await db.Visitantes.find_one({"NumeroDocumento": user.NumeroDocumento})
     if visitante_existente:
         raise HTTPException(status_code=400, detail="El visitante ya existe")
     
@@ -116,16 +115,16 @@ async def register_visitante(user: PersonaVisitante, db=Depends(get_db)):
     nuevo_visitante = {
         "Nombres": user.Nombres,
         "Apellidos": user.Apellidos,
-        "Rol":user.Rol,
         "TipoSangre": user.TipoSangre,
+        "TipoDocumento":user.TipoDocumento,
         "NumeroDocumento": user.NumeroDocumento,
         "LugarEstablecido": user.LugarEstablecido,
         "Estado": user.Estado,
-        "email": user.email,
+        "Email": user.Email,
     }
 
     # Insertar los datos en la colección de la base de datos
-    await db.Personas.insert_one(nuevo_visitante)
+    await db.Visitantes.insert_one(nuevo_visitante)
     return {"mensaje": "Visitante registrado exitosamente"}
 
 ########################Endpoint para registrar eventos ########################################
@@ -180,6 +179,24 @@ async def register_elemento(elemento: ElementoCreate, db=Depends(get_db)):
     await db.Elementos.insert_one(nuevo_elemento)
     return {"mensaje": "Elemento registrado exitosamente"}
 
+######################## Endpoint para registrar PreRegistros ########################################
+
+@app.post("/PreRegistro/registro")
+async def register_preregistro(preregistro: PreRegistro, db=Depends(get_db)):
+    print(f"Datos recibidos para el elemento: {preregistro}")
+    
+    # Verificar si el elemento ya existe en la base de datos por su NumeroDocumento
+    preregistro_existente = await db.PreRegistro.find_one({"NumeroDocumento": preregistro.NumeroDocumento})
+    if preregistro_existente:
+        raise HTTPException(status_code=400, detail="El usuario ya existe")
+    
+    # Crear un nuevo elemento con los datos proporcionados
+    nuevo_preregistro = preregistro.dict()
+    
+    # Insertar el nuevo elemento en la base de datos
+    await db.PreRegistro.insert_one(nuevo_preregistro)
+    return {"mensaje": "Elemento registrado exitosamente"}
+
 ################################### Endpoint para registrar un nuevo espacio o vehículo en el parqueadero #######################
 @app.post("/estacionamiento/registro")
 async def registrar_estacionamiento(estacionamiento: EstacionamientoCreate, db=Depends(get_db)):
@@ -224,7 +241,7 @@ async def get_all_estacionamientos(db=Depends(get_db)):
 
 @app.get("/inicio_sesion")
 async def iniciar_sesion(
-    Email: str = Query(..., description="El nombre de usuario"),
+    Email: str = Query(..., description="El correo electrónico del usuario"),
     Contrasenia: str = Query(..., description="La contraseña"),
     db=Depends(get_db)
 ):
@@ -238,3 +255,55 @@ async def iniciar_sesion(
 
     return {"mensaje": "Inicio de sesión exitoso"}
 
+
+
+############################### Mapeo Eventos ##################################
+@app.get("/eventos")
+async def get_eventos(db=Depends(get_db)):
+    eventos = await db.Eventos.find().to_list(1000)
+    for evento in eventos:
+        evento["_id"] = str(evento["_id"])  # Convertir ObjectId a cadena
+    return eventos
+
+############################### Mapeo Aprendices ##################################
+@app.get("/aprendiz")
+async def get_aprendiz(db=Depends(get_db)):
+    aprendices = await db.Aprendices.find().to_list(1000)
+    for aprendiz in aprendices:
+        aprendiz["_id"] = str(aprendiz["_id"])  # Convertir ObjectId a cadena
+    return aprendices
+
+############################### Mapeo Funcionarios ##################################
+@app.get("/funcionario")
+async def get_aprendiz(db=Depends(get_db)):
+    funcionarios = await db.Funcionarios.find().to_list(1000)
+    for funcionario in  funcionarios:
+        funcionario["_id"] = str(funcionario ["_id"])  # Convertir ObjectId a cadena
+    return  funcionarios
+
+############################### Mapeo Visitantes##################################
+@app.get("/visitantes")
+async def get_aprendiz(db=Depends(get_db)):
+    visitantes = await db.Visitantes.find().to_list(1000)
+    for visitante in  visitantes:
+        visitante["_id"] = str(visitante["_id"])  # Convertir ObjectId a cadena
+    return  visitantes
+
+############################### PreRegistro##################################
+@app.get("/PreRegistro")
+async def get_preregistro(db=Depends(get_db)):
+    preregistros = await db.PreRegistro.find().to_list(1000)
+    for preregistro in preregistros:
+        preregistro["_id"] = str(preregistro["_id"])  # Convertir ObjectId a cadena
+    return preregistros
+
+
+
+@app.get("/PreRegistro/registro/buscar")
+async def buscar_preregistro(documento: str, db=Depends(get_db)):
+    preregistro = await db.PreRegistro.find_one({"NumeroDocumento": documento})
+    if preregistro:
+        preregistro["_id"] = str(preregistro["_id"])  # Convertir ObjectId a cadena
+        return {"usuarioEncontrado": True, "nombres": preregistro["Nombres"], "apellidos": preregistro["Apellidos"]}
+    else:
+        return {"usuarioEncontrado": False, "nombres": "", "apellidos": ""}

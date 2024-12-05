@@ -20,20 +20,52 @@ class Usuarios(BaseModel):
     Telefono: int
     Email: str
       
-
-
-class Personas:
-    def __init__(self, Nombres, Apellidos, TipoSangre, NumeroDocumento,Rol, FichaFormacion, ProgramaFormacion,LugarEstablecido, Estado, email):
+class Funcionarios:
+    def __init__(self, Nombres, Apellidos, TipoSangre,TipoDocumento, NumeroDocumento, Area, Estado, Email):
         self.Nombres = Nombres
         self.Apellidos = Apellidos
         self.TipoSangre = TipoSangre
+        self.TipoDocumento = TipoDocumento
         self.NumeroDocumento = NumeroDocumento
-        self.Rol= Rol
-        self.LugarEstablecido = LugarEstablecido
+        self.Area = Area
+        self.Estado = Estado
+        self.Email = Email
+
+
+class Aprendices:
+    def __init__(self, Nombres, Apellidos, TipoSangre, TipoDocuemnto,NumeroDocumento, FichaFormacion, ProgramaFormacion,Estado, Email):
+        self.Nombres = Nombres
+        self.Apellidos = Apellidos
+        self.TipoSangre = TipoSangre
+        self.TipopDocumento = TipoDocuemnto
+        self.NumeroDocumento = NumeroDocumento        
         self.FichaFormacion = FichaFormacion
         self.ProgramaFormacion = ProgramaFormacion
         self.Estado = Estado
-        self.email = email
+        self.Email = Email
+
+class PreRegistro:
+    def __init__(self, Nombres, Apellidos, TipoSangre, TipoDocuemnto,NumeroDocumento, FichaFormacion, ProgramaFormacion,Estado, Email):
+        self.Nombres = Nombres
+        self.Apellidos = Apellidos
+        self.TipoSangre = TipoSangre
+        self.TipopDocumento = TipoDocuemnto
+        self.NumeroDocumento = NumeroDocumento        
+        self.FichaFormacion = FichaFormacion
+        self.ProgramaFormacion = ProgramaFormacion
+        self.Estado = Estado
+        self.Email = Email
+
+class Visitantes:
+    def __init__(self, Nombres, Apellidos, TipoSangre, TipoDocuemento,NumeroDocumento, LugarEstablecido,Estado, Email):
+        self.Nombres = Nombres
+        self.Apellidos = Apellidos
+        self.TipoSangre = TipoSangre
+        self.TipopDocumento = TipoDocuemento
+        self.NumeroDocumento = NumeroDocumento        
+        self.LugarEstablecido = LugarEstablecido
+        self.Estado = Estado
+        self.Email = Email
 
 class Eventos:
     def __init__(self,Nombres,Apellidos, TipoDocumento, NumeroDocumento, Lugar,Email, TipoElemento,  TipoVehiculo, Placa, fechaIngreso, fechaLimite):
@@ -67,23 +99,3 @@ class Elementos:
         self.Color = Color
         self.CantidadElemento = CantidadElemento
         self.SerialElemento = SerialElemento
-
-
-
-"""
-class Flujo (BaseModel):
-    id: Optional[str] = Field(alias="_id") 
-    horaIngreso:int
-    horaSalida:int
-    fechaSalida:int
-    fechaIngreso:int
-    estado:str
-
-
-
-    
-
-
-
-
-"""

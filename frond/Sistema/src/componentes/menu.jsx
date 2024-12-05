@@ -34,11 +34,38 @@ class Menu extends Component {
         </NavLink>
         <div classname="menu">
           <nav id="primary_nav_wrap">
-            
             <ul>
               <li className="current-menu-item">
-                <NavLink to="#">
+                <a href="#">
                   Registros{" "}
+                  <HiOutlineArchiveBoxArrowDown
+                    style={{
+                      position: "absolute",
+                      left: "80%",
+                      fontSize: "35px",
+                      top: "10%",
+                    }}
+                  />{" "}
+                </a>
+                <ul>
+                  <li className="dir">
+                    <NavLink to="/Aprendices">Aprendices</NavLink>
+                  </li>
+                  <li className="dir">
+                    <NavLink to="/Funcionarios">Funcionarios</NavLink>
+                  </li>
+                  <li className="dir">
+                    <NavLink to="/Visitantes">Visitantes</NavLink>
+                  </li>
+                  <li className="dir">
+                    <NavLink to="/eventos">Eventos</NavLink>
+                  </li>
+                </ul>
+              </li>
+
+              <li className="current-menu-item">
+                <NavLink to="#">
+                  Datos guardados{" "}
                   <GoFileDirectory
                     style={{
                       position: "absolute",
@@ -107,21 +134,7 @@ class Menu extends Component {
                   <li className="dir">
                     <NavLink to="/ReporteVisitante">Visitantes</NavLink>
                   </li>
-                  
                 </ul>
-              </li>
-              <li className="current-menu-item">
-                <NavLink to="/eventos">
-                  Eventos{" "}
-                  <MdEvent
-                    style={{
-                      position: "absolute",
-                      left: "80%",
-                      fontSize: "35px",
-                      top: "10%",
-                    }}
-                  />{" "}
-                </NavLink>
               </li>
 
               <li className="current-menu-item">
